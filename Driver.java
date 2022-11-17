@@ -2,6 +2,7 @@ import java.util.Scanner;
 import javax.swing.*;
 import java.io.*;
 import java.text.NumberFormat;
+import java.util.Random;
 
 /** ***************************************************
  *  Name:           Abhi
@@ -32,7 +33,16 @@ public class Driver {
         // a new line character that works on every computer system
         String nl = System.lineSeparator();
 
+        
+        Random rand = new Random();
+        
+        int count = 0;
+        
+        
         // ***** objects *****
+        
+    
+    
         
         
         // ***** print banners *****
@@ -54,16 +64,39 @@ public class Driver {
             Employee E5 = new Employee(15, 22);
     // *** calculations ***
         E1.setHours(10);
-        System.out.println(E1.getHours());
+        System.out.println(E1);
         System.out.println(E2);
-        E3.setHours(14);
+        E3.setHours(44);
         E3.setWage(12);
         System.out.println(E3);
-        System.out.println(E4.getWage());
+        System.out.println(E4);
         E4.setWage(13); // change to 13
         System.out.println(E4);
-        E4.setHours(8);
-        System.out.println(E5.getHours());
+        E4.setHours(50);
+        System.out.println(E5);
+        System.out.println(E2);
+        
+        
+        // extra
+        while (count != 5) {
+            count++;
+        
+        E1.setHours(E1.random());
+            E1.setWage(E1.randWage());
+            System.out.println(E1);
+            E2.setHours(E2.random());
+            E2.setWage(E2.randWage());
+            System.out.println(E2);
+            E3.setHours(E3.random());
+            E3.setWage(E3.randWage());
+            System.out.println(E3);
+            E4.setHours(E4.random());
+            E4.setWage(E4.randWage());
+            System.out.println(E4);
+            E5.setHours(E5.random());
+            E5.setWage(E5.randWage());
+            System.out.println(E5);
+    }
     // ***** Print Formatted Output *****
             // ***** Print Formatted Output *****
                 // System.out.println(E1 + " " + E2 + E3 + E4 + E5);
