@@ -17,6 +17,7 @@ import java.util.Random;
 
 public class Employee {
     // ** class variables **
+    NumberFormat currency = NumberFormat.getCurrencyInstance();
     
     // ** fields ***
     Random rand = new Random();
@@ -28,7 +29,7 @@ public class Employee {
     
     private int id;
     private int hours;
-    private int wage;
+    private double wage;
     
     private double calcReg;
     private double calcOt;
@@ -36,20 +37,20 @@ public class Employee {
     
     // Random
     public int random = 0;
-    public int randWage = 0;
-    private int limit = 61; // for random
+    public double randWage = 0;
+    private int limit = 60; // for random
     private int limit2 = 25;    // for random
     // ** constructors **
     
     // ** no-arg/default constructor
     public Employee(){
-        this.hours = 40; // 8 hours minimum before pay
-        this.wage = 12; // 12 dollars per hour basic wage
+        this.hours = 8; // 8 hours minimum before pay
+        this.wage = 8; // 8 dollars per hour basic wage
         id = getNextID();
     }// end default
     
     // full-arg constructor
-    public Employee(int hours, int wage) {
+    public Employee(int hours, double wage) {
         this.hours = hours;
         this.wage = wage;
         id = getNextID();
@@ -62,7 +63,7 @@ public class Employee {
         return this.hours;
     }// end get name
     
-    public int getWage(){
+    public double getWage(){
         return this.wage;
     }// end get age
     
@@ -75,7 +76,7 @@ public class Employee {
         this.hours = hours;
     }
     
-    public void setWage(int wage) {
+    public void setWage(double wage) {
         this.wage = wage;
     }
     
@@ -89,12 +90,12 @@ public class Employee {
         if (hours > max) {
             remainder = hours % max;
         }
-        calcOt = remainder * OvertimeRate;
+        calcOt = wage * OvertimeRate;
+        calcOt = calcOt * remainder;
         return calcOt;
     }
     
     public double regPay() {
-        
         calcReg = (hours - remainder) * wage;   
         return calcReg;
     }
@@ -104,19 +105,19 @@ public class Employee {
     }
     
     public int random() {   // random hours worked
-        random = rand.nextInt(limit - 1) + 1;
+        random = rand.nextInt(limit + 1 - 8) + 8;
         return random;
     }
     
-    public int randWage() { // random wage
-        randWage = rand.nextInt(limit2 - 1) + 1;
+    public double randWage() { // random wage
+        randWage = rand.nextDouble() * limit2 + (limit2 - 8);   // 8 is minimum wage - limit2 is maximum.
         return randWage;
     }
     
     @Override
     public String toString(){
         // String st =  "  ID : " + getID() + ": Hours : " + getHours() +  ": Wage : " + getWage() + ": OT : " + otPay() + ": Regular : " + regPay() + ": Gross : " + grossPay();
-        System.out.format("%1s %5s %13s %15s %15s %10s", getID(), getHours(), getWage(), otPay(), regPay(), grossPay());
+        System.out.format("%1s %5s %13s %15s %15s %15s", getID(), getHours(), currency.format(getWage()), currency.format(otPay()), currency.format(regPay()), currency.format(grossPay()));
         return " ";
     }// end toSTring
     
