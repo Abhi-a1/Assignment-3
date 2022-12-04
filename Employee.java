@@ -22,19 +22,23 @@ public class Employee {
     Random rand = new Random();
 
     private final int max = 40;
+    private final double OvertimeRate = 1.5;
+    
     private static int nextID = 1000;
     
     private int id;
     private int hours;
     private int wage;
-    private int calcReg;
-    private int calcOt;
-    private int remainder;
     
+    private double calcReg;
+    private double calcOt;
+    private double remainder;
+    
+    // Random
     public int random = 0;
     public int randWage = 0;
-    private int limit = 61;
-    private int limit2 = 25;
+    private int limit = 61; // for random
+    private int limit2 = 25;    // for random
     // ** constructors **
     
     // ** no-arg/default constructor
@@ -80,39 +84,40 @@ public class Employee {
         return nextID++;
     }// end get ID 
     
-    public int otPay() {
+    public double otPay() {
         remainder = 0;
         if (hours > max) {
             remainder = hours % max;
         }
-        calcOt = remainder * wage;
+        calcOt = remainder * OvertimeRate;
         return calcOt;
     }
     
-    public int regPay() {
+    public double regPay() {
         
         calcReg = (hours - remainder) * wage;   
         return calcReg;
     }
     
-    public int grossPay() {
+    public double grossPay() {
         return calcReg + calcOt;
     }
     
-    public int random() {
+    public int random() {   // random hours worked
         random = rand.nextInt(limit - 1) + 1;
         return random;
     }
     
-    public int randWage() {
+    public int randWage() { // random wage
         randWage = rand.nextInt(limit2 - 1) + 1;
         return randWage;
     }
     
     @Override
     public String toString(){
-        String st =  "  ID : " + getID() + ": Hours : " + getHours() +  ": Wage : " + getWage() + ": OT : " + otPay() + ": Regular : " + regPay() + ": Gross : " + grossPay();
-        return st;
+        // String st =  "  ID : " + getID() + ": Hours : " + getHours() +  ": Wage : " + getWage() + ": OT : " + otPay() + ": Regular : " + regPay() + ": Gross : " + grossPay();
+        System.out.format("%1s %5s %13s %15s %15s %10s", getID(), getHours(), getWage(), otPay(), regPay(), grossPay());
+        return " ";
     }// end toSTring
     
     
